@@ -1,0 +1,45 @@
+-------------------------------
+Result of Prediction House Price:
+
+(.devops) shuumatoMacBook-Pro:project-ml-microservice-kubernetes lisa$ ./make_prediction.sh
+Port: 30206
+{
+  "prediction": [
+    20.35373177134412
+  ]
+}
+
+--------------------------------
+Result of running of run_kubernetes.sh:
+(.devops) shuumatoMacBook-Pro:project-ml-microservice-kubernetes lisa$ ./run_kubernetes.sh 
+kubectl run --generator=deployment/apps.v1 is DEPRECATED and will be removed in a future version. Use kubectl run --generator=run-pod/v1 or kubectl create instead.
+deployment.apps/devops3 created
+NAME                       READY   STATUS              RESTARTS   AGE
+devops2-947968574-ct24d    1/1     Running             0          74m
+devops3-775644f84b-n9pv5   0/1     ContainerCreating   0          0s
+service/devops3 exposed
+NODE_PORT=30206
+--------------------------------
+PODS INFO:
+(.devops) shuumatoMacBook-Pro:project-ml-microservice-kubernetes lisa$ kubectl get pods
+NAME                       READY   STATUS    RESTARTS   AGE
+devops2-947968574-ct24d    1/1     Running   0          78m
+devops3-775644f84b-n9pv5   1/1     Running   0          4m3s
+--------------------------------
+Service Info:
+(.devops) shuumatoMacBook-Pro:project-ml-microservice-kubernetes lisa$ kubectl describe service devops3
+Name:                     devops3
+Namespace:                default
+Labels:                   run=devops3
+Annotations:              <none>
+Selector:                 run=devops3
+Type:                     NodePort
+IP:                       10.105.135.62
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  30206/TCP
+Endpoints:                172.17.0.5:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+-----------------------------------
